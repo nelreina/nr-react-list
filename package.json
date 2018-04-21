@@ -4,12 +4,7 @@
   "description": "nr-react-list React component",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
@@ -25,13 +20,11 @@
   "devDependencies": {
     "nwb": "0.21.x",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "prop-types": "^15.6.1"
   },
   "author": "",
-  "homepage": "",
   "license": "MIT",
   "repository": "",
-  "keywords": [
-    "react-component"
-  ]
+  "keywords": ["react-component"]
 }

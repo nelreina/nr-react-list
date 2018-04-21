@@ -1,15 +1,21 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-import Example from '../../src'
+const data = ['one', 'two', 'three'];
+
+const Button = ({ item }) => <button>{item}</button>;
+
+import List from '../../src';
 
 class Demo extends Component {
   render() {
-    return <div>
-      <h1>nr-react-list Demo</h1>
-      <Example/>
-    </div>
+    return (
+      <div>
+        <h1>nr-react-list Demo</h1>
+        <List of={Button} iterator={data} />
+      </div>
+    );
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo />, document.querySelector('#demo'));
