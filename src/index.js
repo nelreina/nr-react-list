@@ -1,17 +1,20 @@
 import React from 'react';
 import pt from 'prop-types';
+import { isObject, assign } from 'lodash';
 
-const List = ({ iterator, of: Component, isobject, ...props }) => {
+const List = ({ iterator, of: Component, propname, ...rest }) => {
   if (iterator && Component) {
-    if (isobject) {
+    if (isObject(iterator)) {
       const keys = Object.keys(iterator);
-      return keys.map(key => (
-        <Component key={key} item={iterator[key]} {...props} />
-      ));
+      return keys.map(key => {
+        const props = assign({}, rest, { [propname]: iterator[key] });
+        return <Component key={key} {...props} />;
+      });
     } else {
-      return iterator.map((item, key) => (
-        <Component key={key} item={item} {...props} />
-      ));
+      return iterator.map((item, key) => {
+        const props = assign({}, rest, { [propname]: item });
+        return <Component key={key} {...props} />;
+      });
     }
   } else {
     return 'nr-react-list Component require an "iterator" and "of" props';
@@ -20,10 +23,10 @@ const List = ({ iterator, of: Component, isobject, ...props }) => {
 List.propTypes = {
   iterator: pt.oneOfType([pt.array, pt.object]).isRequired,
   of: pt.any.isRequired,
-  isobject: pt.bool
+  propname: pt.string
 };
 List.defaultProps = {
-  isobject: false
+  propname: 'item'
 };
 
 export default List;
