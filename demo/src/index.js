@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import './style.css';
-const data = ['one', 'two', 'three'];
-
-const navs = ['Home', 'About', 'Contact'];
-
-const Button = ({ item }) => <button>{item}</button>;
-const NavLink = ({ display }) => <li>{display}</li>;
-
 import List from '../../src';
+import { assign } from 'lodash';
+import './style.css';
+
+import ListItemProp from './ListItemProp';
+import ListCostumPropName from './ListCostumPropName';
+const fieldObject = {
+  firstName: {
+    type: 'text',
+    isRequired: true
+  },
+  lastName: {
+    type: 'text',
+    isRequired: true
+  },
+  email: {
+    type: 'email',
+    isRequired: true
+  }
+};
+
+const FieldItem = ({ item, name }) => (
+  <pre>{JSON.stringify(assign({}, item, { name }), null, 2)}</pre>
+);
 
 class Demo extends Component {
   render() {
@@ -16,35 +31,10 @@ class Demo extends Component {
       <div className="container">
         <h1>nr-react-list Demo</h1>
         <p>Utility Component to render an iterator(Array of objects) </p>
-        <h3>List with an "item" prop</h3>
-        <code>
-          <pre>{`const data = ['one', 'two', 'three'];
-const Button = ({ item }) => <button>{item}</button>;
+        {/* <List of={FieldItem} iterator={fieldObject} keyname="name" /> */}
 
-// Use List Component
-// Notice the button component has an "item' prop
-// By default List component expect an item prop
-
-<List of={Button} iterator={data} />
-            `}</pre>
-        </code>
-        <div className="result">
-          Will render: <List of={Button} iterator={data} />
-        </div>
-        <h3>List with a custom propname</h3>
-        <code>
-          <pre>{`const navs = ['Home', 'About', 'Contact'];
-
-const NavLink = ({ display }) => <li>{display}</li>;
-
-// just add a custom "propname" prop to List Component
-
-<List of={NavLink} iterator={navs} propname="display" />
-            `}</pre>
-        </code>
-        <ul className="result">
-          <List of={NavLink} iterator={navs} propname="display" />
-        </ul>
+        <ListItemProp />
+        <ListCostumPropName />
       </div>
     );
   }
